@@ -346,8 +346,8 @@ export function DocsLayout({ children, title, description }: DocsLayoutProps) {
         </aside>
 
         {/* Main Content */}
-        <main className="flex-1 min-w-0">
-          <div className="max-w-4xl mx-auto px-4 lg:px-8 py-8 lg:py-12">
+        <main className="flex-1 min-w-0 overflow-x-hidden">
+          <div className="max-w-5xl mx-auto px-4 lg:px-8 py-8 lg:py-12">
             {title && (
               <div className="mb-8">
                 <h1 className="text-3xl lg:text-4xl font-bold text-gray-100 mb-2">
@@ -358,7 +358,7 @@ export function DocsLayout({ children, title, description }: DocsLayoutProps) {
                 )}
               </div>
             )}
-            <article className="prose prose-invert max-w-none prose-headings:scroll-mt-20 prose-headings:text-gray-100 prose-p:text-gray-400 prose-a:text-emerald-400 hover:prose-a:text-emerald-300 prose-strong:text-gray-200 prose-code:text-pink-400 prose-code:before:content-none prose-code:after:content-none prose-pre:bg-gray-900 prose-pre:border prose-pre:border-gray-800">
+            <article className="prose prose-invert max-w-none prose-headings:scroll-mt-20 prose-headings:text-gray-100 prose-p:text-gray-400 prose-a:text-emerald-400 hover:prose-a:text-emerald-300 prose-strong:text-gray-200 prose-code:text-pink-400 prose-code:before:content-none prose-code:after:content-none prose-pre:bg-gray-900 prose-pre:border prose-pre:border-gray-800 overflow-x-auto">
               {children}
             </article>
 
