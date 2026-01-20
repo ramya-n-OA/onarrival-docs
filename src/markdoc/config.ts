@@ -1,4 +1,4 @@
-import { Config, nodes, Tag } from '@markdoc/markdoc';
+import { Config, nodes, Tag, Node } from '@markdoc/markdoc';
 
 // Custom tag definitions
 const callout = {
@@ -23,7 +23,7 @@ const tabs = {
       required: true,
     },
   },
-  transform(node: any, config: Config) {
+  transform(node: Node, config: Config) {
     const attributes = node.transformAttributes(config);
     const children = node.transformChildren(config);
     return new Tag(this.render, attributes, children);

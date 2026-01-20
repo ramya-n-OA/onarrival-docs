@@ -36,11 +36,6 @@ const typeColors: Record<string, string> = {
 
 export function SequenceDiagram({ title, participants, steps }: SequenceDiagramProps) {
   const [expandedStep, setExpandedStep] = useState<number | null>(null);
-  const colWidth = 100 / participants.length;
-
-  const getParticipantIndex = (name: string) => {
-    return participants.findIndex(p => p.toLowerCase().includes(name.toLowerCase()));
-  };
 
   return (
     <div className="my-8 rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 overflow-hidden">
@@ -69,10 +64,7 @@ export function SequenceDiagram({ title, participants, steps }: SequenceDiagramP
       {/* Steps */}
       <div className="divide-y divide-gray-100 dark:divide-gray-800">
         {steps.map((step, i) => {
-          const fromIdx = getParticipantIndex(step.from);
-          const toIdx = getParticipantIndex(step.to);
           const isExpanded = expandedStep === i;
-          const isLeftToRight = fromIdx < toIdx;
 
           return (
             <div key={i} className="relative">

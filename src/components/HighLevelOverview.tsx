@@ -7,7 +7,6 @@ import {
   Search,
   CreditCard,
   CheckCircle2,
-  ChevronRight,
   Zap,
   ArrowRight,
   Code2,
@@ -161,57 +160,6 @@ const typeStyles = {
   event: { color: 'bg-violet-500', label: 'Event' },
   callback: { color: 'bg-amber-500', label: 'Callback' },
 };
-
-// Animated connection line component
-function ConnectionLine({
-  from,
-  to,
-  isActive,
-  delay = 0
-}: {
-  from: ParticipantKey;
-  to: ParticipantKey;
-  isActive: boolean;
-  delay?: number;
-}) {
-  const participantOrder: ParticipantKey[] = ['native', 'bridge', 'pwa', 'onarrival', 'partner'];
-  const fromIdx = participantOrder.indexOf(from);
-  const toIdx = participantOrder.indexOf(to);
-  const isReverse = fromIdx > toIdx;
-
-  const left = Math.min(fromIdx, toIdx) * 20 + 10;
-  const width = Math.abs(toIdx - fromIdx) * 20;
-
-  return (
-    <div
-      className="absolute h-0.5 top-1/2 -translate-y-1/2"
-      style={{
-        left: `${left}%`,
-        width: `${width}%`,
-      }}
-    >
-      <div className={cn(
-        "h-full rounded-full transition-all duration-500",
-        isActive
-          ? `bg-gradient-to-r ${participants[from].color}`
-          : "bg-gray-700/50"
-      )} />
-      {isActive && (
-        <div
-          className={cn(
-            "absolute top-1/2 -translate-y-1/2 w-2 h-2 rounded-full",
-            `bg-gradient-to-r ${participants[from].color}`,
-            "shadow-lg animate-pulse"
-          )}
-          style={{
-            animation: `flowPacket 1.5s ease-in-out ${delay}s infinite`,
-            [isReverse ? 'right' : 'left']: 0,
-          }}
-        />
-      )}
-    </div>
-  );
-}
 
 // Participant node component
 function ParticipantNode({
@@ -486,7 +434,7 @@ export function HighLevelOverview() {
             High Level Overview
           </h1>
           <p className="text-lg text-gray-400 max-w-2xl mb-8">
-            Complete integration flow between your native application and OnArrival's
+            Complete integration flow between your native application and OnArrival&apos;s
             flight booking platform. Hybrid PWA + Native SDK for optimal performance.
           </p>
 
