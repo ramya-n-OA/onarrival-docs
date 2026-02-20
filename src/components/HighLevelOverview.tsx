@@ -972,6 +972,17 @@ function QuickReferenceCards() {
 // ============================================================================
 
 export function HighLevelOverview() {
+  useEffect(() => {
+    const script = document.createElement('script');
+    script.src = 'https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js';
+    script.onload = () => {
+      // @ts-ignore
+      window.mermaid?.initialize({ startOnLoad: true, theme: 'dark' });
+      // @ts-ignore
+      window.mermaid?.contentLoaded();
+    };
+    document.head.appendChild(script);
+  }, []);
   const [activePhase, setActivePhase] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const [activeStep, setActiveStep] = useState(0);
@@ -1041,18 +1052,18 @@ export function HighLevelOverview() {
             backgroundSize: '32px 32px',
           }} />
         </div>
-
+  
         {/* Gradient orbs */}
         <div className="absolute top-0 right-0 w-64 sm:w-96 h-64 sm:h-96 bg-emerald-500/10 rounded-full blur-3xl" />
         <div className="absolute bottom-0 left-0 w-64 sm:w-96 h-64 sm:h-96 bg-blue-500/10 rounded-full blur-3xl" />
-
+  
         <div className="relative p-6 sm:p-8 lg:p-12">
           {/* Badge */}
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-sm font-medium mb-6">
             <Zap className="w-4 h-4" />
             Integration Architecture
           </div>
-
+  
           <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-4">
             High Level Overview
           </h1>
@@ -1063,9 +1074,9 @@ export function HighLevelOverview() {
           <p className="text-sm text-gray-500 mb-8">
             Use arrow keys to navigate phases, spacebar to play/pause animation.
           </p>
-
+  
           {/* Participants row */}
-          <div className="flex items-center justify-between max-w-3xl mb-8 px-2 sm:px-4 overflow-x-auto">
+          <div className="flex items-center justify-between max-w-3xl px-2 sm:px-4 overflow-x-auto">
             {(Object.keys(participants) as ParticipantKey[]).map((key, idx) => {
               const p = participants[key];
               const isInCurrentPhase = currentPhase.steps.some(
@@ -1084,30 +1095,30 @@ export function HighLevelOverview() {
               );
             })}
           </div>
-
-          {/* Phase selector */}
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
-            {phases.map((phase, idx) => (
-              <PhaseCard
-                key={phase.id}
-                phase={phase}
-                index={idx}
-                isActive={activePhase === idx}
-                progress={activePhase === idx && isPlaying ? progress : undefined}
-                onClick={() => {
-                  setActivePhase(idx);
-                  setActiveStep(0);
-                  setIsPlaying(false);
-                }}
-              />
-            ))}
-          </div>
         </div>
       </div>
-
-      {/* Architecture Diagram */}
+  
+      {/* Architecture Diagram - NOW HERE */}
       <ArchitectureDiagram />
-
+  
+      {/* Phase selector - NOW HERE */}
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+        {phases.map((phase, idx) => (
+          <PhaseCard
+            key={phase.id}
+            phase={phase}
+            index={idx}
+            isActive={activePhase === idx}
+            progress={activePhase === idx && isPlaying ? progress : undefined}
+            onClick={() => {
+              setActivePhase(idx);
+              setActiveStep(0);
+              setIsPlaying(false);
+            }}
+          />
+        ))}
+      </div>
+  
       {/* Active Phase Details */}
       <div className="rounded-2xl bg-gray-900/50 border border-gray-800 overflow-hidden">
         {/* Phase header */}
@@ -1127,7 +1138,7 @@ export function HighLevelOverview() {
               <p className="text-sm text-gray-400">{currentPhase.description}</p>
             </div>
           </div>
-
+  
           <div className="flex items-center gap-2">
             {/* Navigation buttons */}
             <button
@@ -1148,7 +1159,7 @@ export function HighLevelOverview() {
             >
               <ChevronLeft className="w-4 h-4" />
             </button>
-
+  
             <button
               onClick={() => {
                 setIsPlaying(!isPlaying);
@@ -1173,7 +1184,7 @@ export function HighLevelOverview() {
                 </>
               )}
             </button>
-
+  
             <button
               onClick={() => {
                 if (activePhase < phases.length - 1) {
@@ -1194,7 +1205,7 @@ export function HighLevelOverview() {
             </button>
           </div>
         </div>
-
+  
         {/* Steps */}
         <div className="p-4 sm:p-6 space-y-3">
           {currentPhase.steps.map((step, idx) => (
@@ -1208,10 +1219,10 @@ export function HighLevelOverview() {
           ))}
         </div>
       </div>
-
+  
       {/* Quick Reference Cards */}
       <QuickReferenceCards />
-
+  
       {/* Environment Config */}
       <div className="rounded-2xl bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 border border-gray-700 p-5 sm:p-6">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
@@ -1232,7 +1243,7 @@ export function HighLevelOverview() {
           </div>
         </div>
       </div>
-
+  
       {/* Error Handling Note */}
       <div className="rounded-2xl bg-amber-500/5 border border-amber-500/20 p-5 sm:p-6">
         <div className="flex gap-4">
@@ -1252,7 +1263,7 @@ export function HighLevelOverview() {
           </div>
         </div>
       </div>
-
+  
       {/* Token Refresh Flow */}
       <div className="rounded-2xl bg-blue-500/5 border border-blue-500/20 p-5 sm:p-6">
         <div className="flex gap-4">
@@ -1265,26 +1276,26 @@ export function HighLevelOverview() {
             </p>
             <div className="relative">
               <pre className="p-3 rounded-lg bg-gray-900 border border-gray-800 text-xs font-mono text-gray-300 overflow-x-auto">
-{`// On 401 response
-window.JSBridge.eventRefreshToken({
-  reason: "TOKEN_EXPIRED"
-});
-
-// Native app callback with new token
-onTokenRefreshed({ jwt: "new_token..." });`}
+  {`// On 401 response
+  window.JSBridge.eventRefreshToken({
+    reason: "TOKEN_EXPIRED"
+  });
+  
+  // Native app callback with new token
+  onTokenRefreshed({ jwt: "new_token..." });`}
               </pre>
               <CopyButton text={`// On 401 response
-window.JSBridge.eventRefreshToken({
-  reason: "TOKEN_EXPIRED"
-});
-
-// Native app callback with new token
-onTokenRefreshed({ jwt: "new_token..." });`} />
+  window.JSBridge.eventRefreshToken({
+    reason: "TOKEN_EXPIRED"
+  });
+  
+  // Native app callback with new token
+  onTokenRefreshed({ jwt: "new_token..." });`} />
             </div>
           </div>
         </div>
       </div>
-
+  
       {/* Next Steps */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
         {[
@@ -1294,10 +1305,9 @@ onTokenRefreshed({ jwt: "new_token..." });`} />
           { title: 'Webhooks', href: '/docs/events-webhooks/webhook-events', icon: Webhook, color: 'pink' },
         ].map((link) => (
           <a
-            key={link.href}
+          key={link.href}
             href={link.href}
-            className="group flex items-center gap-2 sm:gap-3 p-3 sm:p-4 rounded-xl bg-gray-900/50 border border-gray-800 hover:border-gray-700 transition-all hover:scale-[1.02]"
-          >
+            className="group flex items-center gap-2 sm:gap-3 p-3 sm:p-4 rounded-xl bg-gray-900/50 border border-gray-800 hover:border-gray-700 transition-all hover:scale-[1.02]">
             <link.icon className={cn(
               "w-4 h-4 sm:w-5 sm:h-5",
               link.color === 'emerald' && "text-emerald-400",
@@ -1312,7 +1322,7 @@ onTokenRefreshed({ jwt: "new_token..." });`} />
           </a>
         ))}
       </div>
-
+  
       {/* Legend */}
       <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 py-4 text-sm">
         {Object.entries(typeStyles).map(([key, value]) => (

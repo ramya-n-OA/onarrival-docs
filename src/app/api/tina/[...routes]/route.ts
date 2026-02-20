@@ -1,28 +1,40 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from "next/server";
 
-// TinaCMS local development API handler
-// This proxies requests to the TinaCMS local GraphQL server
+/**
+ * TinaCMS Local GraphQL Proxy
+ * Proxies Next.js requests → Tina GraphQL Dev Server
+ */
 
-const TINA_GQL_URL = 'http://localhost:4001/graphql';
+const TINA_GQL_URL = "http://localhost:4001/graphql";
 
 export async function POST(request: NextRequest) {
   try {
-    const body = await request.text();
+    // Always resolve to a valid string (prevents undici crash)
+    const body = (await request.text()) || "{}";
 
     const response = await fetch(TINA_GQL_URL, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        // Forward original content-type when available
+        "Content-Type":
+          request.headers.get("content-type") ?? "application/json",
       },
       body,
     });
 
     const data = await response.json();
-    return NextResponse.json(data);
+
+    return NextResponse.json(data, {
+      status: response.status,
+    });
   } catch (error) {
-    console.error('TinaCMS API Error:', error);
+    console.error("TinaCMS API Error:", error);
+
     return NextResponse.json(
-      { error: 'TinaCMS server not running. Start with: npm run dev:tina' },
+      {
+        error: "TinaCMS server not running",
+        fix: "Start Tina with: npx tinacms dev",
+      },
       { status: 503 }
     );
   }
@@ -30,7 +42,7 @@ export async function POST(request: NextRequest) {
 
 export async function GET() {
   return NextResponse.json({
-    message: 'TinaCMS GraphQL API',
-    hint: 'Run "npm run dev:tina" to start the CMS server'
+    message: "TinaCMS GraphQL Proxy Active",
+    graphql: TINA_GQL_URL,
   });
 }

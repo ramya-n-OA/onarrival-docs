@@ -36,16 +36,20 @@
       "title": "Code Samples",
       "icon": "Code",
       "items": [
-        { "title": "Flutter Integration", "href": "/docs/code-samples/flutter-integration-integration" },
-        { "title": "React Native Integration", "href": "/docs/code-samples/react-native-integration-integration" },
-        { "title": "Android / Swift Integration", "href": "/docs/code-samples/android-swift-integration-integration" }
+        { "title": "Flutter Integration", "href": "/docs/code-samples/flutter-integration" },
+        { "title": "React Native Integration", "href": "/docs/code-samples/react-native-integration" },
+        { "title": "Android / Swift Integration", "href": "/docs/code-samples/android-swift-integration" }
       ]
     },
     {
       "title": "Support",
       "icon": "HelpCircle",
       "items": [
-        { "title": "Troubleshooting", "href": "/docs/support/troubleshooting" }
+        { "title": "Troubleshooting", "href": "/docs/support/troubleshooting"},
+        { "title": "Support FAQs", "href": "/docs/support/faqs" },
+        { "title": "Refund Scenarios", "href": "/docs/support/refunds" },
+        { "title": "Integration FAQ", "href": "/docs/support/integration-faq" }
+
       ]
     }
   ]

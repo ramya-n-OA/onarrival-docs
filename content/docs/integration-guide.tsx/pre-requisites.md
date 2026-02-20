@@ -5,8 +5,6 @@ category: "integration-guide"
 order: 1
 ---
 
-# Pre-Requisites
-
 Complete these technical requirements before starting your integration.
 
 ---

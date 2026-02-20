@@ -5,8 +5,6 @@ category: "events-webhooks"
 order: 5
 ---
 
-# JS Bridge Events
-
 The JS Bridge enables bidirectional communication between your native mobile app and OnArrival's PWA running in a WebView.
 
 ---

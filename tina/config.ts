@@ -1,8 +1,7 @@
 import { defineConfig, LocalAuthProvider } from 'tinacms';
 
 // Local mode for development - no cloud needed
-const isLocal = process.env.TINA_PUBLIC_IS_LOCAL === 'true';
-
+const isLocal = true; // Force local mode for development
 export default defineConfig({
   contentApiUrlOverride: '/api/tina/gql',
   authProvider: isLocal ? new LocalAuthProvider() : undefined,

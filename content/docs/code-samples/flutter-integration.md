@@ -1,11 +1,9 @@
 ---
-title: "Flutter"
+title: "Flutter Integration"
 description: "Flutter WebView integration with JavaScript bridge"
 category: "code-samples"
 order: 1
 ---
-
-# Flutter Integration
 
 This Flutter application integrates OnArrival's flight booking web interface using `InAppWebView`. It leverages a bridge between JavaScript events from the webview and native Dart callbacks.
 

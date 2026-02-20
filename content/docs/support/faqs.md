@@ -1,11 +1,9 @@
 ---
-title: "FAQs"
+title: "Frequently Asked Questions"
 description: "Frequently asked questions about OnArrival integration"
 category: "support"
 order: 1
 ---
-
-# Frequently Asked Questions
 
 ## General Questions
 

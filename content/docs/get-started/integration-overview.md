@@ -5,8 +5,6 @@ category: "get-started"
 order: 3
 ---
 
-# Product & Integration
-
 ## What is OnArrival?
 
 OnArrival is a modular travel platform that enables consumer businesses to launch travel experiences inside their existing app — without building a full OTA stack or integrating multiple suppliers.

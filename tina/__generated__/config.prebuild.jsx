@@ -1,6 +1,6 @@
 // tina/config.ts
 import { defineConfig, LocalAuthProvider } from "tinacms";
-var isLocal = process.env.TINA_PUBLIC_IS_LOCAL === "true";
+var isLocal = true;
 var config_default = defineConfig({
   contentApiUrlOverride: "/api/tina/gql",
   authProvider: isLocal ? new LocalAuthProvider() : void 0,

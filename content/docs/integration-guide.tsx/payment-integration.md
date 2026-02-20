@@ -5,8 +5,6 @@ category: "integration-guide"
 order: 4
 ---
 
-# Payments & Refunds
-
 This guide covers the server-to-server payment flow between OnArrival and your backend.
 
 {% callout type="warning" title="Fare Hold Window" %}

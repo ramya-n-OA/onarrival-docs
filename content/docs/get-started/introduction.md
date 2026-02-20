@@ -5,8 +5,6 @@ category: "get-started"
 order: 1
 ---
 
-# Overview
-
 OnArrival provides APIs and UI components for embedding flight booking into mobile applications. This documentation covers the technical integration between your app and our platform.
 
 ---

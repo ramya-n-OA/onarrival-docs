@@ -1,26 +1,74 @@
 ---
-title: "Authentication"
-description: "JWT tokens, S2S API keys, and session management"
-category: "integration-guide"
+title: Authentication
+description: 'JWT tokens, S2S API keys, and session management'
+category: integration-guide
 order: 2
 ---
 
-# Authentication
-
 OnArrival uses two authentication methods: **JWT tokens** for user sessions and **API keys** for server-to-server communication.
 
----
+***
 
 ## Authentication Methods
 
-| Context | Method | When to Use |
-|---------|--------|-------------|
+| Context          | Method           | When to Use            |
+| ---------------- | ---------------- | ---------------------- |
 | User Profile API | JWT Bearer Token | Session initialization |
-| Payment APIs | S2S API Key | Backend operations |
-| Webhooks | S2S API Key | Event notifications |
-| Refund APIs | S2S API Key | Transaction processing |
+| Payment APIs     | S2S API Key      | Backend operations     |
+| Webhooks         | S2S API Key      | Event notifications    |
+| Refund APIs      | S2S API Key      | Transaction processing |
 
----
+***
+
+### User Profile API — JWT (User Session Auth)
+
+The User Profile API is invoked as part of the login / session initialization flow.
+
+* Called during an active user Login (triggered via \`eventLogin\`) and session creation
+* Executed only after token validation succeeds
+* Requires user identity and authorization context
+* Short-lived call used for booking and personalization setup
+
+This API relies on the \*\*user’s JWT token\*\*, which validates identity and permissions.
+
+### Payment, Refund & Webhook APIs — S2S Authentication (\`x-api-key\`)
+
+Payment and refund workflows operate asynchronously of the user session. Therefore, these APIs use Server-to-Server authentication via \`x-api-key\` instead of user tokens.
+
+S2S authentication is required because:
+
+1\. Session Timeout Resilience:
+
+    Payment or refund processing may continue even after the user leaves the app or the session expires.
+
+    
+
+2\. Asynchronous Processing
+
+    Payment gateways may return status updates or callbacks at delayed intervals.
+
+    OnArrival needs to poll payment status after the user's session has ended (not preferred since it’s expensive and high load on server)
+
+3\. Background & System-Triggered Operations
+
+    These flows may execute without any active user interaction, including:
+
+* automated cancellations
+* admin / support actions
+* offline or delayed processing
+* reconciliation & retries
+* scheduled status checks
+
+4\. Webhook Security
+
+* Webhooks do not carry user session context
+* S2S authentication ensures secure validation and processing of external events.
+
+5\. System-to-System Communication
+
+ 
+
+Notifications and status events occur at the platform level and are not tied to a user request, so they must not depend on user authentication.
 
 ## JWT Authentication
 
@@ -41,25 +89,25 @@ Your JWT must include these claims:
 }
 ```
 
-| Claim | Type | Description |
-|-------|------|-------------|
-| `sub` | string | Unique user identifier |
-| `iss` | string | Your token issuer URL |
-| `exp` | number | Expiration time (Unix timestamp) |
-| `iat` | number | Issued at time (Unix timestamp) |
-| `organizationId` | string | Provided by OnArrival |
-| `organizationCode` | string | Provided by OnArrival |
+| Claim              | Type   | Description                      |
+| ------------------ | ------ | -------------------------------- |
+| `sub`              | string | Unique user identifier           |
+| `iss`              | string | Your token issuer URL            |
+| `exp`              | number | Expiration time (Unix timestamp) |
+| `iat`              | number | Issued at time (Unix timestamp)  |
+| `organizationId`   | string | Provided by OnArrival            |
+| `organizationCode` | string | Provided by OnArrival            |
 
 ### Signing Algorithms
 
 OnArrival supports these algorithms:
 
-- **RS256** (RSA + SHA-256) — Recommended
-- **RS384** (RSA + SHA-384)
-- **RS512** (RSA + SHA-512)
-- **ES256** (ECDSA + SHA-256)
+* **RS256** (RSA + SHA-256) — Recommended
+* **RS384** (RSA + SHA-384)
+* **RS512** (RSA + SHA-512)
+* **ES256** (ECDSA + SHA-256)
 
----
+***
 
 ## Public Key Configuration
 
@@ -107,7 +155,7 @@ SuuPiLJXZptN9nndrQmbXEps2aiAFbWhM78LhWx4cbbfAAtVT...
 
 Use this option if your keys rotate infrequently.
 
----
+***
 
 ## S2S API Key Authentication
 
@@ -123,21 +171,21 @@ x-api-key: sk_live_abc123xyz789
 x-user-id: user_12345
 ```
 
-| Header | Description |
-|--------|-------------|
-| `x-api-key` | Your S2S API key |
+| Header      | Description                           |
+| ----------- | ------------------------------------- |
+| `x-api-key` | Your S2S API key                      |
 | `x-user-id` | The user associated with this request |
 
 ### Why S2S Authentication?
 
 Payment and webhook operations occur outside the user's session context:
 
-- **Async processing** — Payment gateways respond after session timeout
-- **Background jobs** — Refunds, cancellations, reconciliation
-- **Webhooks** — No user session available
-- **Admin operations** — Support workflows, manual adjustments
+* **Async processing** — Payment gateways respond after session timeout
+* **Background jobs** — Refunds, cancellations, reconciliation
+* **Webhooks** — No user session available
+* **Admin operations** — Support workflows, manual adjustments
 
----
+***
 
 ## Session Flow
 
@@ -166,7 +214,7 @@ The session flow establishes user identity when the PWA loads:
 }
 ```
 
----
+***
 
 ## Token Generation API
 
@@ -205,7 +253,7 @@ curl -X POST https://api.onarrival.io/s2s/api/v1/auth/token \
 Either `email` or `phone` is required for token generation.
 {% /callout %}
 
----
+***
 
 ## Token Refresh
 
@@ -223,13 +271,13 @@ eventRefreshToken: async () => {
 }
 ```
 
----
+***
 
 ## Security Checklist
 
-- [ ] JWT tokens use RS256 or stronger algorithm
-- [ ] Token expiry is set appropriately (recommended: 1 hour)
-- [ ] JWKS endpoint uses HTTPS
-- [ ] S2S API keys are stored securely (not in client code)
-- [ ] IP allowlisting configured for webhook endpoints
-- [ ] Token refresh handler implemented in native app
+* JWT tokens use RS256 or stronger algorithm
+* Token expiry is set appropriately (recommended: 1 hour)
+* JWKS endpoint uses HTTPS
+* S2S API keys are stored securely (not in client code)
+* IP allowlisting configured for webhook endpoints
+* Token refresh handler implemented in native app

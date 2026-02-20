@@ -5,8 +5,6 @@ category: "support"
 order: 6
 ---
 
-# Edge Cases & Error Handling
-
 This document covers common edge cases and error scenarios in the OnArrival integration.
 
 ---

@@ -1,11 +1,9 @@
 ---
-title: "Android / Swift"
+title: "Android / Swift Integration"
 description: "Native Android and iOS WebView integration"
 category: "code-samples"
 order: 3
 ---
-
-# Native Android & iOS Integration
 
 Integrate OnArrival's PWA using native WebView components.
 

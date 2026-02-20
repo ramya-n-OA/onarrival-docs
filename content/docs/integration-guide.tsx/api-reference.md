@@ -5,8 +5,6 @@ category: "integration-guide"
 order: 7
 ---
 
-# API Reference
-
 Complete reference for all OnArrival integration APIs.
 
 ## Environments

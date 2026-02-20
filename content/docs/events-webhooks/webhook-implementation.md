@@ -5,8 +5,6 @@ category: "events-webhooks"
 order: 2
 ---
 
-# Webhook Implementation
-
 Webhooks are HTTPS endpoints on your server that receive event notifications from OnArrival.
 
 ## What is a Webhook?

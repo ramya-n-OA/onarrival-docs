@@ -5,7 +5,6 @@ category: "events-webhooks"
 order: 1
 ---
 
-# Event Types Reference
 
 OnArrival emits **server-side events** to track user intent, booking lifecycle, payment progression, and refunds in near-real-time.
 

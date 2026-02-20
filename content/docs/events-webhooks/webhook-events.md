@@ -5,8 +5,6 @@ category: "events-webhooks"
 order: 6
 ---
 
-# Webhooks
-
 Webhooks deliver real-time notifications to your backend when booking lifecycle events occur. Implement webhook handlers to keep your systems synchronized with OnArrival.
 
 ---

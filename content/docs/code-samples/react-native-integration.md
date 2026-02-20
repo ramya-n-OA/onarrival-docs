@@ -1,11 +1,9 @@
 ---
-title: "React Native"
+title: "React Native Integration"
 description: "React Native WebView integration with JavaScript bridge"
 category: "code-samples"
 order: 2
 ---
-
-# React Native Integration
 
 Integrate OnArrival's flight booking experience in React Native using `react-native-webview`.
 

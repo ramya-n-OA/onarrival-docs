@@ -5,8 +5,6 @@ category: "support"
 order: 2
 ---
 
-# Refund Scenarios
-
 This document covers all refund scenarios and their handling in the OnArrival integration.
 
 ---

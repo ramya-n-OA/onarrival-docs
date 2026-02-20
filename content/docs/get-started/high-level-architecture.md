@@ -5,5 +5,6 @@ category: "get-started"
 order: 2
 ---
 
-<!-- This page uses a custom React component for enhanced interactivity -->
-<!-- See src/components/HighLevelOverview.tsx -->
+Complete integration architecture and user journey for OnArrival flight booking.
+
+> The interactive diagram is available in the “High Level Overview” page in the app

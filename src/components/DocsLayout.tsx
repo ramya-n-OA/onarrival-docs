@@ -23,7 +23,7 @@ const navigation = [
     title: 'Getting Started',
     icon: Home,
     items: [
-      { title: 'Overview', href: '/docs/get-started/introduction' },
+      { title: 'Introduction', href: '/docs/get-started/introduction' },
       { title: 'High Level Overview', href: '/docs/get-started/high-level-architecture' },
       { title: 'Product & Integration', href: '/docs/get-started/integration-overview' },
     ],
@@ -34,7 +34,7 @@ const navigation = [
     items: [
       { title: 'Pre-Requisites', href: '/docs/integration-guide/pre-requisites' },
       { title: 'Authentication', href: '/docs/integration-guide/authentication' },
-      { title: 'User Profile API', href: '/docs/integration-guide/user-profile-api-api' },
+      { title: 'User Profile API', href: '/docs/integration-guide/user-profile-api' },
       { title: 'Payment & Refunds', href: '/docs/integration-guide/payment-integration' },
       { title: 'Payment & Authentication Edge Cases', href: '/docs/integration-guide/payment--authentication-edge-cases' },
       { title: 'API Reference', href: '/docs/integration-guide/api-reference' },
@@ -55,9 +55,9 @@ const navigation = [
     title: 'Code Samples',
     icon: Code,
     items: [
-      { title: 'Flutter', href: '/docs/code-samples/flutter-integration-integration' },
-      { title: 'React Native', href: '/docs/code-samples/react-native-integration-integration' },
-      { title: 'Android / Swift', href: '/docs/code-samples/android-swift-integration-integration' },
+      { title: 'Flutter', href: '/docs/code-samples/flutter-integration' },
+      { title: 'React Native', href: '/docs/code-samples/react-native-integration' },
+      { title: 'Android / Swift', href: '/docs/code-samples/android-swift-integration' },
     ],
   },
   {
@@ -67,6 +67,7 @@ const navigation = [
       { title: 'Edge Cases', href: '/docs/support/troubleshooting' },
       { title: 'FAQs', href: '/docs/support/faqs' },
       { title: 'Refund Scenarios', href: '/docs/support/refunds' },
+      { title: 'Integration FAQ', href: '/docs/support/integration-faq' }
     ],
   },
 ];
